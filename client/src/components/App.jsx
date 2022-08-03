@@ -2,7 +2,6 @@ import React from 'react';
 import MovieList from '../components/MovieList.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import AddMovie from '../components/AddMovie.jsx';
-// import movies from '../data/ExampleMovieData.js';
 
 class App extends React.Component {
 
@@ -28,7 +27,6 @@ class App extends React.Component {
     this.setState({newMovie: event.target.value});
   }
 
-  // Functions to modify state
   handleAddMovie(event) {
     event.preventDefault();
     console.log(this.state.newMovie);
@@ -41,7 +39,6 @@ class App extends React.Component {
     console.log(this.state.movies);
   }
 
-  // Functions to handle events (clicks, changes, etc.)
 
   render() {
     return (
