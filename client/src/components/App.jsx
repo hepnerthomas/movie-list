@@ -9,13 +9,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      movies: [
-        {title: 'Mean Girls'},
-        {title: 'Hackers'},
-        {title: 'The Grey'},
-        {title: 'Sunshine'},
-        {title: 'Ex Machina'},
-        ],
+      movies: [],
       newMovie: ''
     };
 
@@ -30,7 +24,6 @@ class App extends React.Component {
   handleAddMovie(event) {
     event.preventDefault();
     console.log(this.state.newMovie);
-    // var movieName =
     let movies = this.state.movies;
     let newMovie = {title: this.state.newMovie};
     console.log(movies);
