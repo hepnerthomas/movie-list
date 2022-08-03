@@ -1,4 +1,5 @@
 import React from 'react';
+import * as _ from 'underscore';
 import MovieList from '../components/MovieList.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import AddMovie from '../components/AddMovie.jsx';
@@ -73,17 +74,26 @@ class App extends React.Component {
     let searchMatches = [];
     for (let i = 0; i < matchingWordCounts.length; i++) {
       let matchCount = matchingWordCounts[i];
+      let movie = this.state.movies[i];
       if (matchCount > 0) {
-        searchMatches.push(this.state.movies[i]);
+        searchMatches.push({count: matchCount, movie: movie});
       }
     }
+    // Sort the searchMatches
+    searchMatches = _.sortBy(searchMatches, 'count').reverse();
+    searchMatches = _.map(searchMatches, function(element) {
+      return element.movie;
+    });
+
+
+    // Set the state
+    var result = Object.values(searchMatches);
+    console.log(searchMatches);
     this.setState({searchedMovies: searchMatches});
     if (searchMatches.length === 0) {
       this.setState({messageToDisplay: 'No movie by that name found.'});
-      console.log("are we here yet?");
     }
-    console.log("Matching Movies: ")
-    console.log(searchMatches);
+
   }
 
   //
