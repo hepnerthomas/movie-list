@@ -8,13 +8,16 @@ class MovieList extends React.Component {
   }
 
   render() {
-    let movieList = this.props.movies.map((movie, index) =>
+
+    const {movies, messageToDisplay} = this.props;
+
+    let movieList = movies.map((movie, index) =>
       <div key={index}><MovieListEntry movie={movie}/></div>
     );
 
     return (
       <div>
-        <div>{this.props.messageToDisplay}</div>
+        <div>{messageToDisplay}</div>
         <ul>{movieList}</ul>
       </div>
     );

@@ -7,8 +7,11 @@ class MovieListEntry extends React.Component {
   }
 
   render() {
+
+    const {movie} = this.props;
+
     return (
-      <li>{this.props.movie.title}</li>
+      <li>{movie.title}</li>
     );
   }
 

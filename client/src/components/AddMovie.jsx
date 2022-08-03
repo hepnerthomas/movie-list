@@ -4,17 +4,14 @@ class AddMovie extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.state = {value: ''};
-    // this.handleChange = this.handleChange.bind(this);
   }
 
-  // handleChange
-
   render() {
+    const {handleAddMovie, newMovie, handleNewMovieChange} = this.props;
     return (
       <div>
-        <form onSubmit={this.props.handleAddMovie}>
-          <input type="text" value={this.props.newMovie} onChange={this.props.handleNewMovieChange}/>
+        <form onSubmit={handleAddMovie}>
+          <input type="text" value={newMovie} onChange={handleNewMovieChange}/>
           <input type="submit" value="Add"/>
         </form>
       </div>
