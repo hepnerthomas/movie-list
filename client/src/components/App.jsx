@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from '../components/MovieList.jsx';
 import SearchBar from '../components/SearchBar.jsx';
+import AddMovie from '../components/AddMovie.jsx';
 // import movies from '../data/ExampleMovieData.js';
 
 class App extends React.Component {
@@ -24,6 +25,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>MovieList App</h1>
+        <AddMovie />
         <SearchBar />
         <MovieList movies={this.state.movies}/>
       </div>
