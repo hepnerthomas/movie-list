@@ -11,11 +11,14 @@ class MovieList extends React.Component {
     let movieList = this.props.movies.map((movie, index) =>
       <div key={index}><MovieListEntry movie={movie}/></div>
     );
+
     return (
       <div>
+        <div>{this.props.messageToDisplay}</div>
         <ul>{movieList}</ul>
       </div>
     );
+
   }
 
 }
