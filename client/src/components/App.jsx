@@ -1,18 +1,12 @@
 import React from 'react';
-import ExampleMovieData from '../data/ExampleMovieData.js';
 import MovieList from '../components/MovieList.jsx';
-
-// const App = (props) => (
-//   <div>Hello World! This still working?</div>
-
-// );
-
+import SearchBar from '../components/SearchBar.jsx';
+// import movies from '../data/ExampleMovieData.js';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.state = {movies: ExampleMovieData.movies};
     this.state = {movies: [
       {title: 'Mean Girls'},
       {title: 'Hackers'},
@@ -29,7 +23,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <p>Movie List</p>
+        <h1>MovieList App</h1>
+        <SearchBar />
         <MovieList movies={this.state.movies}/>
       </div>
     );
