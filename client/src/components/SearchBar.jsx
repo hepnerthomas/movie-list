@@ -7,12 +7,11 @@ class SearchBar extends React.Component {
   }
 
   render() {
-
-    const {searchInput, handleSearchInput} = this.props;
+    const {handleSearch, searchInput, handleSearchInput} = this.props;
     return (
       <div>
-        <form onSubmit={this.props.handleSearch}>
-          <input type="text" value={searchInput} onChange={handleSearchInput}/>
+        <form onSubmit={handleSearch}>
+          <input type="search" value={searchInput} onChange={handleSearchInput}/>
           <input type="submit" value="Search"/>
         </form>
       </div>
