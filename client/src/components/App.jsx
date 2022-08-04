@@ -64,10 +64,11 @@ class App extends React.Component {
 
     // Get the number of matching words for each movie from our search query
     let matchingWordCounts = this.getMatchingWordCounts(searchMovieTitle, transformedMovies);
-
+    console.log(matchingWordCounts);
     // set the state of searchedMovies in order of matching word counts, excluding counts of zero
     let searchMatches = this.sortMatches(matchingWordCounts, this.state.movies);
-
+    console.log(searchMovieTitle);
+    console.log(searchMatches);
     // Set the state
     this.setState({searchedMovies: searchMatches});
     if (searchMatches.length === 0) {
@@ -92,15 +93,13 @@ class App extends React.Component {
   getMatchingWordCounts(query, movies) {
     let matchingWordCounts = movies.map(function(movie) {
       let wordCount = 0;
-      //let movieWords = movie.split(' ');
       let searchWords = query.split(' ');
       for (let i = 0; i < searchWords.length; i++) {
         let word = searchWords[i];
-        if (movie.includes(word)) {
+        if (movie.includes(word) && word !== '') {
           wordCount++;
         }
       }
-      // console.log(wordCount);
       return wordCount;
     });
     return matchingWordCounts;
