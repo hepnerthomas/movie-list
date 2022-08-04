@@ -1,4 +1,5 @@
 import React from 'react';
+import * as _ from 'underscore';
 import MovieListEntry from '../components/MovieListEntry.jsx'
 
 class MovieList extends React.Component {
@@ -9,12 +10,15 @@ class MovieList extends React.Component {
 
   render() {
 
-    const {movies, messageToDisplay, toggleMovieToWatch} = this.props;
+    const {movies, messageToDisplay, toggleMovieToWatch, displayList} = this.props;
 
-    let movieList = movies.map((movie, index) =>
-      <div key={index}>
+    let displayedMovies = _.filter(movies,  function(elem){ return elem.status === displayList });
+    let movieList = displayedMovies.map((movie, index) =>
+
+        <div key={index}>
         <MovieListEntry movie={movie} toggleMovieToWatch={toggleMovieToWatch} index={index}/>
-      </div>
+        </div>
+
     );
 
     return (

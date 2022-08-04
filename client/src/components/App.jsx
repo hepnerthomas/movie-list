@@ -3,6 +3,7 @@ import * as _ from 'underscore';
 import MovieList from '../components/MovieList.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import AddMovie from '../components/AddMovie.jsx';
+import WatchList from '../components/WatchList.jsx';
 
 class App extends React.Component {
 
@@ -14,7 +15,8 @@ class App extends React.Component {
       searchedMovies: [],
       searchInput: '',
       newMovie: '',
-      messageToDisplay: ''
+      messageToDisplay: '',
+      displayList: 'To Watch'
     };
 
     // Add Movie functions
@@ -32,6 +34,7 @@ class App extends React.Component {
     this.transformMovieString = this.transformMovieString.bind(this);
     this.getMatchingWordCounts = this.getMatchingWordCounts.bind(this);
     this.sortMatches = this.sortMatches.bind(this);
+    this.handleWatchList = this.handleWatchList.bind(this);
   }
 
   handleNewMovieChange(event) {
@@ -41,7 +44,7 @@ class App extends React.Component {
   handleAddMovie(event) {
     event.preventDefault();
     let movies = this.state.movies;
-    let newMovie = {title: this.state.newMovie, status: "Not Watched"};
+    let newMovie = {title: this.state.newMovie, status: "To Watch"};
 
     movies.push(newMovie);
 
@@ -83,8 +86,13 @@ class App extends React.Component {
   toggleMovieToWatch(event) {
     let index = event.target.value;
     let movies = this.state.movies.slice();
-    movies[index].status = movies[index].status === "Not Watched" ? "Watched" : "Not Watched";
+    movies[index].status = movies[index].status === "To Watch" ? "Watched" : "To Watch";
     this.setState({movies: movies});
+  }
+
+  handleWatchList(event) {
+    this.setState({displayList: event.target.value});
+    console.log(this.state.displayList);
   }
 
   //
@@ -145,7 +153,10 @@ class App extends React.Component {
                    handleSearch={this.handleSearch}
                    handleSearchInput={this.handleSearchInput}/>
 
+        <WatchList handleWatchList={this.handleWatchList}/>
+
         <MovieList movies={this.state.searchedMovies}
+                   displayList={this.state.displayList}
                    messageToDisplay={this.state.messageToDisplay}
                    toggleMovieToWatch={this.toggleMovieToWatch}/>
       </div>
