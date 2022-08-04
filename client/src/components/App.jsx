@@ -28,6 +28,7 @@ class App extends React.Component {
     // Helper functions
     this.transformMovieString = this.transformMovieString.bind(this);
     this.getMatchingWordCounts = this.getMatchingWordCounts.bind(this);
+    this.sortMatches = this.sortMatches.bind(this);
   }
 
   handleNewMovieChange(event) {
@@ -63,32 +64,15 @@ class App extends React.Component {
     let transformedMovies = this.state.movies.map((movie) =>
       this.transformMovieString(movie.title)
     );
-    console.log(transformedMovies);
 
     // Get the number of matching words for each movie from our search query
     let matchingWordCounts = this.getMatchingWordCounts(searchMovieTitle, transformedMovies);
     console.log("Matching Word Counts: ", matchingWordCounts)
-    console.log(searchMovieTitle);
 
     // set the state of searchedMovies in order of matching word counts, excluding counts of zero
-    let searchMatches = [];
-    for (let i = 0; i < matchingWordCounts.length; i++) {
-      let matchCount = matchingWordCounts[i];
-      let movie = this.state.movies[i];
-      if (matchCount > 0) {
-        searchMatches.push({count: matchCount, movie: movie});
-      }
-    }
-    // Sort the searchMatches
-    searchMatches = _.sortBy(searchMatches, 'count').reverse();
-    searchMatches = _.map(searchMatches, function(element) {
-      return element.movie;
-    });
-
+    let searchMatches = this.sortMatches(matchingWordCounts, this.state.movies);
 
     // Set the state
-    var result = Object.values(searchMatches);
-    console.log(searchMatches);
     this.setState({searchedMovies: searchMatches});
     if (searchMatches.length === 0) {
       this.setState({messageToDisplay: 'No movie by that name found.'});
@@ -122,6 +106,25 @@ class App extends React.Component {
       return wordCount;
     });
     return matchingWordCounts;
+  }
+
+  sortMatches(matchingWordCounts, movies) {
+    let searchMatches = [];
+    for (let i = 0; i < matchingWordCounts.length; i++) {
+      let matchCount = matchingWordCounts[i];
+      let movie = movies[i];
+      if (matchCount > 0) {
+        searchMatches.push({count: matchCount, movie: movie});
+      }
+    }
+    // Sort the searchMatches
+    searchMatches = _.sortBy(searchMatches, 'count').reverse();
+    searchMatches = _.map(searchMatches, function(element) {
+      return element.movie;
+    });
+
+    // return searchMatches array
+    return searchMatches;
   }
 
   render() {
