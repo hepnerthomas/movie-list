@@ -7,11 +7,12 @@ class MovieListEntry extends React.Component {
   }
 
   render() {
-
-    const {movie} = this.props;
-
+    const {movie, toggleMovieToWatch, index} = this.props;
     return (
-      <li>{movie.title}</li>
+      <div>
+          {movie.title}
+          <button onClick={toggleMovieToWatch} value={index}>{movie.status}</button>
+      </div>
     );
   }
 

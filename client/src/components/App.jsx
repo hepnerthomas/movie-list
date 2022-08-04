@@ -25,6 +25,9 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
 
+    // Differentiate watched vs unwatched movies
+    this.toggleMovieToWatch = this.toggleMovieToWatch.bind(this);
+
     // Helper functions
     this.transformMovieString = this.transformMovieString.bind(this);
     this.getMatchingWordCounts = this.getMatchingWordCounts.bind(this);
@@ -38,15 +41,14 @@ class App extends React.Component {
   handleAddMovie(event) {
     event.preventDefault();
     let movies = this.state.movies;
-    let newMovie = {title: this.state.newMovie};
+    let newMovie = {title: this.state.newMovie, status: "Not Watched"};
 
     movies.push(newMovie);
-    this.setState({movies: movies});
 
     // by default, searched movies is equivalent to movies
+    this.setState({movies: movies});
     this.setState({searchedMovies: movies});
     this.setState({messageToDisplay: ''});
-    console.log(this.state.movies);
   }
 
   handleSearchInput(event) {
@@ -64,11 +66,10 @@ class App extends React.Component {
 
     // Get the number of matching words for each movie from our search query
     let matchingWordCounts = this.getMatchingWordCounts(searchMovieTitle, transformedMovies);
-    console.log(matchingWordCounts);
+
     // set the state of searchedMovies in order of matching word counts, excluding counts of zero
     let searchMatches = this.sortMatches(matchingWordCounts, this.state.movies);
-    console.log(searchMovieTitle);
-    console.log(searchMatches);
+
     // Set the state
     this.setState({searchedMovies: searchMatches});
     if (searchMatches.length === 0) {
@@ -77,6 +78,13 @@ class App extends React.Component {
       this.setState({messageToDisplay: ''});
     }
 
+  }
+
+  toggleMovieToWatch(event) {
+    let index = event.target.value;
+    let movies = this.state.movies.slice();
+    movies[index].status = movies[index].status === "Not Watched" ? "Watched" : "Not Watched";
+    this.setState({movies: movies});
   }
 
   //
@@ -138,7 +146,8 @@ class App extends React.Component {
                    handleSearchInput={this.handleSearchInput}/>
 
         <MovieList movies={this.state.searchedMovies}
-                   messageToDisplay={this.state.messageToDisplay}/>
+                   messageToDisplay={this.state.messageToDisplay}
+                   toggleMovieToWatch={this.toggleMovieToWatch}/>
       </div>
     );
   }
