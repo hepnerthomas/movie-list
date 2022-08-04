@@ -37,10 +37,9 @@ class App extends React.Component {
 
   handleAddMovie(event) {
     event.preventDefault();
-    console.log(this.state.newMovie);
     let movies = this.state.movies;
     let newMovie = {title: this.state.newMovie};
-    console.log(movies);
+
     movies.push(newMovie);
     this.setState({movies: movies});
 
@@ -51,8 +50,6 @@ class App extends React.Component {
   }
 
   handleSearchInput(event) {
-    // console.log(this.state.searchInput);
-    // event.preventDefault();
     this.setState({searchInput: event.target.value});
   }
 
@@ -67,7 +64,6 @@ class App extends React.Component {
 
     // Get the number of matching words for each movie from our search query
     let matchingWordCounts = this.getMatchingWordCounts(searchMovieTitle, transformedMovies);
-    console.log("Matching Word Counts: ", matchingWordCounts)
 
     // set the state of searchedMovies in order of matching word counts, excluding counts of zero
     let searchMatches = this.sortMatches(matchingWordCounts, this.state.movies);
@@ -76,6 +72,8 @@ class App extends React.Component {
     this.setState({searchedMovies: searchMatches});
     if (searchMatches.length === 0) {
       this.setState({messageToDisplay: 'No movie by that name found.'});
+    } else {
+      this.setState({messageToDisplay: ''});
     }
 
   }
