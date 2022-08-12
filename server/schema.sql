@@ -27,4 +27,9 @@ CREATE TABLE movies (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(50),
   status VARCHAR(20)
-)
+);
+
+/* Add sample data to the movies table: */
+INSERT INTO movies VALUES (NULL, "Jurassic Park", "To Watch");
+INSERT INTO movies VALUES (NULL, "Interstellar", "Watched");
+INSERT INTO movies VALUES (NULL, "Top Gun: Maverick", "Watched");
