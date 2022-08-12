@@ -5,7 +5,7 @@ module.exports = {
   // get all movies
   get: function(callback) {
     var queryString = 'SELECT * FROM movies';
-    db.query(queryString, (err, res) => {
+    db.query(queryString, (err, results) => {
       callback(err, results);
     });
   },
