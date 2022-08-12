@@ -7,6 +7,4 @@ const connection = mysql.createConnection({
   database: 'movies'
 });
 
-connection.connect();
-
 module.exports = {connection};
