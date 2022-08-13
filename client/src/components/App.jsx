@@ -5,6 +5,8 @@ import SearchBar from '../components/SearchBar.jsx';
 import AddMovie from '../components/AddMovie.jsx';
 import WatchList from '../components/WatchList.jsx';
 
+const axios = require('axios');
+
 class App extends React.Component {
 
   constructor(props) {
@@ -35,6 +37,21 @@ class App extends React.Component {
     this.getMatchingWordCounts = this.getMatchingWordCounts.bind(this);
     this.sortMatches = this.sortMatches.bind(this);
     this.handleWatchList = this.handleWatchList.bind(this);
+  }
+
+  // mount the database to the client
+  componentDidMount() {
+    // Make a GET request to get list of movies
+     axios.get('/movies')
+      .then((response) => {
+        // handle success
+        console.log(response.data);
+        this.setState({movies: response.data});
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
   }
 
   handleNewMovieChange(event) {
